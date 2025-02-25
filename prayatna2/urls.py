@@ -17,12 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from breachBuster.views import *
+from Admin.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/',login_view,name = 'login'),
     path('register/',register,name = 'register'),
-    path('home/',home_page,name = 'home')
+    path('home/',home_page,name = 'home'),
+    path('Admin_login/',Admin_login_view,name = 'Admin_login'),
+    path('Admin_register/',Admin_register,name = 'Admin_register'),
+    path('Admin_home/',Admin_home,name = 'Admin_home')
 
 
 ]
