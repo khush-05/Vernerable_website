@@ -26,7 +26,8 @@ urlpatterns = [
     path('home/',home_page,name = 'home'),
     path('Admin_login/',Admin_login_view,name = 'Admin_login'),
     path('Admin_register/',Admin_register,name = 'Admin_register'),
-    path('Admin_home/',Admin_home,name = 'Admin_home')
+    path('Admin_home/',Admin_home,name = 'Admin_home'),
+    path('search_result/',search_result,name='search_result')
 
 
 ]

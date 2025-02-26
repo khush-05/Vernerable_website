@@ -36,12 +36,19 @@ def login_view(request):
     return render(request, 'login.html', {'form': form})
 
 def home_page(request):
-    query = request.GET.get('query', '')
-    results = None
-    if query:
-        # 🚨 Vulnerable SQL Query: Directly concatenating user input!
-        sql = "SELECT * FROM breachbuster_product WHERE name LIKE '%%{}%%'".format(query)
-        with connection.cursor() as cursor:
-            cursor.execute(sql)
-            results = cursor.fetchall()
-    return render(request, 'home.html', {'results': results, 'query': query})
+    if request.method == "GET" and "query" in request.GET:
+        query = request.GET.get('query', '').strip()
+        return redirect(f'/search_result/?query={query}')
+    return render(request, 'home.html')
+
+
+def search_result(request):
+        query = request.GET.get('query', '')
+        results = None
+        if query:
+         # 🚨 Vulnerable SQL Query: Directly concatenating user input!
+            sql = "SELECT * FROM breachbuster_product WHERE name LIKE '%%{}%%'".format(query)
+            with connection.cursor() as cursor:
+                cursor.execute(sql)
+                results = cursor.fetchall()
+        return render(request, 'search_result.html', {'results': results, 'query': query})
